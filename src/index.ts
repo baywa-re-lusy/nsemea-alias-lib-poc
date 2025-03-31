@@ -53,7 +53,7 @@ function replaceAliasInFile(file: string) {
   const fileContents = fs.readFileSync(file, 'utf8');
   //Add your custom logic for replacing text inside the file.
   console.log('fileContents : ', fileContents);
-  const newContents = fileContents.replace('@module/', '../module/');
+  const newContents = fileContents.replace(/@modules\//g, '../modules/');
   console.log('newContents : ', newContents);
   fs.writeFileSync(file, newContents);
 }
