@@ -49,12 +49,14 @@ function readAllFiles(dir: string) {
   const result:string[] = [];
 
   for (const file of files) {
-    console.log('readAllFiles file in files:' , file);
+    // console.log('readAllFiles file in files:' , file);
     if (file.isDirectory()) {
       result.concat(readAllFiles(join(dir, file.name)));
     } else {
+      console.log('File to add:', join(dir, file.name));
       result.push(join(dir, file.name));
     }
   }
+  console.log('result:', result);
   return result;
 }
