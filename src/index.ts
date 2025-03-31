@@ -24,9 +24,10 @@ export async function replaceAlias() {
   console.log('TSconfig.json content outDir:', outDir);
 
   if (baseUrl) {
-    config.outDir = baseUrl;
+    config.baseUrl = baseUrl;
   }
   if (outDir) {
+    console.log('isAbsolute(outDir) :', isAbsolute(outDir));
     config.outDir = isAbsolute(outDir) ? outDir : join(baseUrl, outDir);
   }
 
