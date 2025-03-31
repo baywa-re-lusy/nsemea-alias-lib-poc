@@ -12,11 +12,10 @@ export async function replaceAlias() {
   console.log('posixOutput : ', posixOutput);
   const files = globSync(`${posixOutput}/**/*.js`, { ignore: `!${posixOutput}/**/node_modules/**` });
 
-  console.log('FILES: ', files);
-
-  // for (const file of readAllFiles(posixOutput)) {
-  //   console.log(file);
-  // }
+  // console.log('FILES: ', files);
+  files.forEach(file => {
+    replaceAliasInFile(file)
+  });
 
 }
 
@@ -50,17 +49,10 @@ function loadConfigFile() {
   return config;
 }
 
-function* readAllFiles(dir: string) {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  const result:string[] = [];
-
-  for (const file of files) {
-    // console.log('readAllFiles file in files:' , file);
-    if (file.isDirectory()) {
-       yield* readAllFiles(join(dir, file.name));
-    } else {
-      console.log('EXTENSION :')
-      yield join(dir, file.name);
-    }
-  }
+function replaceAliasInFile(file: string) {
+  console.log('replaceAliasInFile > File : ', file)
+  const fileContents = fs.readFileSync(file, 'utf8');
+  //Add your custom logic for replacing text inside the file.
+  const newContents = fileContents.replace('@module/', '../module/');
+  fs.writeFileSync(file, newContents);
 }
