@@ -1,6 +1,6 @@
 {
   "name": "nsemea-alias-lib-poc",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index.js",
   "bin": {
@@ -17,7 +17,8 @@
     "url": "https://github.com/baywa-re-lusy/nsemea-alias-lib-poc.git"
   },
   "dependencies": {
-    "commander": "^13.1.0"
+    "commander": "^13.1.0",
+    "mylas": "^2.1.13"
   },
   "devDependencies": {
     "@types/node": "^22.13.14",
