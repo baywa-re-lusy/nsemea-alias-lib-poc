@@ -7,3 +7,6 @@ const { version } = require('../../package.json');
 program
   .name('nsemea-alias')
   .version(version);
+
+replaceAlias();
+
