@@ -9,8 +9,10 @@ export async function replaceAlias() {
   // Finding files and changing alias paths
   const posixOutput = config.outDir.replace(/\\/g, '/').replace(/\/+$/g, '');
   console.log('posixOutput : ', posixOutput);
-  const filesToTreat = readAllFiles(posixOutput);
-  console.log('filesToTreat : ', filesToTreat);
+
+  for (const file of readAllFiles(posixOutput)) {
+    console.log(file);
+  }
 
 }
 
