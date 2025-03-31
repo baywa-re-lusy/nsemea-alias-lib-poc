@@ -1,6 +1,6 @@
 import { join, isAbsolute, resolve } from 'path';
 import { Json } from 'mylas';
-import { globbySync } from 'globby';
+import * as fs from 'fs';
 
 export async function replaceAlias() {
   console.log('Running replace alias');
@@ -8,16 +8,9 @@ export async function replaceAlias() {
 
   // Finding files and changing alias paths
   const posixOutput = config.outDir.replace(/\\/g, '/').replace(/\/+$/g, '');
-  const globPattern = [
-    `${posixOutput}/**/*.js`,
-    `!${posixOutput}/**/node_modules`
-  ];
-  console.log('Search pattern:', globPattern);
-  const files = globbySync(globPattern, {
-    dot: true,
-    onlyFiles: true
-  });
-  console.log('Found files:', files);
+  console.log('posixOutput : ', posixOutput);
+  const filesToTreat = readAllFiles(posixOutput);
+  console.log('filesToTreat : ', filesToTreat);
 
 }
 
@@ -48,4 +41,19 @@ function loadConfigFile() {
   console.log('loadConfigFile > Config :', config)
 
   return config;
+}
+
+function readAllFiles(dir: string) {
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  const result:string[] = [];
+
+  for (const file of files) {
+    console.log('readAllFiles file in files:' , file);
+    if (file.isDirectory()) {
+      result.concat(readAllFiles(join(dir, file.name)));
+    } else {
+      result.push(join(dir, file.name));
+    }
+  }
+  return result;
 }
