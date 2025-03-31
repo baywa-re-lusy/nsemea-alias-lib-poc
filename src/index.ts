@@ -1,6 +1,7 @@
 import { join, isAbsolute, resolve } from 'path';
 import { Json } from 'mylas';
 import * as fs from 'fs';
+import { globSync } from "glob";
 
 export async function replaceAlias() {
   console.log('Running replace alias');
@@ -9,10 +10,13 @@ export async function replaceAlias() {
   // Finding files and changing alias paths
   const posixOutput = config.outDir.replace(/\\/g, '/').replace(/\/+$/g, '');
   console.log('posixOutput : ', posixOutput);
+  const files = globSync(`${posixOutput}/**/*.js`, { ignore: `!${posixOutput}/**/node_modules/**` });
 
-  for (const file of readAllFiles(posixOutput)) {
-    console.log(file);
-  }
+  console.log('FILES: ', files);
+
+  // for (const file of readAllFiles(posixOutput)) {
+  //   console.log(file);
+  // }
 
 }
 
@@ -55,7 +59,7 @@ function* readAllFiles(dir: string) {
     if (file.isDirectory()) {
        yield* readAllFiles(join(dir, file.name));
     } else {
-      console.log('File to add:', join(dir, file.name));
+      console.log('EXTENSION :')
       yield join(dir, file.name);
     }
   }
