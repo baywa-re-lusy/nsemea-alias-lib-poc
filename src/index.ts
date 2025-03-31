@@ -36,6 +36,7 @@ function loadConfigFile() {
   }
   if (outDir) {
     config.outDir = isAbsolute(outDir) ? outDir : join(baseUrl, outDir);
+    config.outDir = resolve(process.cwd(), config.outDir);
   }
 
   console.log('loadConfigFile > Config :', config)
