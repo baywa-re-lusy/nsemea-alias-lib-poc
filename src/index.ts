@@ -16,7 +16,6 @@ export async function replaceAlias() {
   files.forEach(file => {
     replaceAliasInFile(file)
   });
-
 }
 
 function loadConfigFile() {
@@ -53,6 +52,8 @@ function replaceAliasInFile(file: string) {
   console.log('replaceAliasInFile > File : ', file)
   const fileContents = fs.readFileSync(file, 'utf8');
   //Add your custom logic for replacing text inside the file.
+  console.log('fileContents : ', fileContents);
   const newContents = fileContents.replace('@module/', '../module/');
+  console.log('newContents : ', newContents);
   fs.writeFileSync(file, newContents);
 }
