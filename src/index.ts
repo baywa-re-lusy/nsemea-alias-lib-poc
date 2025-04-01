@@ -52,6 +52,6 @@ function replaceAliasInFile(file: string) {
   console.log('replaceAliasInFile > File : ', file)
   const fileContents = fs.readFileSync(file, 'utf8');
   //Add your custom logic for replacing text inside the file.
-  const newContents = fileContents.replace(/@modules\//g, '../modules/');
+  const newContents = fileContents.replace(/@nsemea_lib\//g, '../nsemea_lib/');
   fs.writeFileSync(file, newContents);
 }
