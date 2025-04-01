@@ -53,7 +53,8 @@ function replaceAliasInFile(file: string) {
   const fileContents = fs.readFileSync(file, 'utf8');
   //Add your custom logic for replacing text inside the file.
   const newContents = fileContents.replace(/@nsemea_lib\//g, '../../nsemea_lib/')
-    .replace(/@nsemea_lib_sdf\//g, '../nsemea_lib/');
+    .replace(/@nsemea_lib_sdf\//g, '../nsemea_lib/')
+    .replace(/"sweetalert2"/g, '"SuiteScripts/NSEMEA/3PL/SweetAlert2.v11.min.js"');
 
   fs.writeFileSync(file, newContents);
 }
